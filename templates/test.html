@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Task Master</title>
+{% endblock%}
+
+{% block body %}
+
+<div itemscope itemtype="https://schema.org/Recipe">
+    {% for task in tasks %}
+    <h1 itemprop="name">{{ task.name }}</h1>    
+    <div itemprop="description">Jallas</div>
+
+<div><span>By </span><span itemprop="author">Sven</span></div>
+
+
+<img src="https://img.chefkoch-cdn.de/rezepte/787141182064101/bilder/1235194/crop-600x400/klassisches-jaegerschnitzel.jpg" itemprop="image"></img>
+
+<p>
+
+    <div>
+
+        <span>Category: </span>
+
+        <span itemprop="recipeCategory">Mittagessen</span>
+
+    </div>
+
+    <div>
+
+        <span>serves: </span><span itemprop="recipeYield">1 loaf</span>
+
+    </div>
+
+    <div>
+
+        <span>Cooking time: </span><span itemprop="prepTime">PT15M</span>
+
+    </div>
+
+    <div itemprop="nutrition" itemtype="https://schema.org/NutritionInformation">
+
+        <span>provides:  </span>
+
+        <span itemprop="calories">500 calories</span>
+
+    </div>
+
+</p>
+    <ul>
+    
+    <li itemprop="recipeIngredient">{{ task.content }}</li>
+    
+    <li itemprop="recipeIngredient">{{ task.ingredient }}</li>
+    
+    </ul>
+    {% endfor %}
+    
+
+<div data-bring-import data-bring-base-quantity="4" style="display:none">
+
+       <a href="https://www.getbring.com">Bring! Einkaufsliste App f&uuml;r iPhone und Android</a>
+
+</div>
+    </div>
+
+<script async="async" src="//platform.getbring.com/widgets/import.js"></script>
+{% endblock%}
