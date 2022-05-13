@@ -9,16 +9,18 @@ db = SQLAlchemy(app)
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(200), nullable=False)
+    ingredient = db.Column(db.String(200), nullable=False)
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
-        return '<Task %r' % self.id
+        return '<Task %r>' % self.id
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
         task_content = request.form['content']
-        new_task = Todo(content=task_content)
+        task_ingredient = request.form['ingredient']
+        new_task = Todo(content=task_content, ingredient=task_ingredient)
 
         try:
             db.session.add(new_task)
@@ -46,6 +48,7 @@ def update(id):
     task = Todo.query.get_or_404(id)
     if request.method == 'POST':
         task.content = request.form['content']
+        task.ingredient = request.form['ingredient']
 
         try:
             db.session.commit()
